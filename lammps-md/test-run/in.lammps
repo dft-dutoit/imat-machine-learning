@@ -10,7 +10,6 @@ pair_coeff              * * pace ../potential/c_ace.yace C
 pair_coeff              * * table ../potential/d2.table D2 9.0
 
 mass                    1 12.011000
-velocity                all create 200 1234
 
 # Compute the energies and per atom energies from the contributions.
 compute                 c1 all pair pace
@@ -26,7 +25,7 @@ variable                dUd2 equal c_c2/atoms
 thermo_style            custom step time pe press density etotal v_dUpace v_dUd2 temp
 thermo                  1000
 
-dump                    traj all custom 100 go-nvt.dat id type x y z c_peratom
+dump                    traj all custom 100 c-traj.dat id type x y z c_peratom
 
 ### run
 
@@ -49,3 +48,4 @@ fix                     1 all nvt temp 5000 300 0.1
 run                     500 # Run this section of the simulation (cooling) for 5000 fs
 unfix                   1
 
+write_data              c-output.data
