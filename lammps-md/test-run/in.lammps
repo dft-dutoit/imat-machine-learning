@@ -1,0 +1,51 @@
+atom_style              atomic 
+units                   metal
+boundary                p p p
+
+read_data               ../structures/rnd-1.data
+
+### interactions
+pair_style              hybrid/overlay pace table linear 10000
+pair_coeff              * * pace ../potential/c_ace.yace C 
+pair_coeff              * * table ../potential/d2.table D2 9.0
+
+mass                    1 12.011000
+velocity                all create 200 1234
+
+# Compute the energies and per atom energies from the contributions.
+compute                 c1 all pair pace
+compute                 c2 all pair table
+compute                 peratom all pe/atom
+
+# calculate the average e/atom for each pair style individually
+variable                dUpace equal c_c1/atoms
+variable                dUd2 equal c_c2/atoms
+
+### Specify your output to terminal and files
+
+thermo_style            custom step time pe press density etotal v_dUpace v_dUd2 temp
+thermo                  1000
+
+dump                    traj all custom 100 go-nvt.dat id type x y z c_peratom
+
+### run
+
+velocity               all create 8000 42
+
+timestep                0.001
+fix                     1 all nvt temp 8000 8000 0.1
+run                     100 # Run this section of the simulation (randomisation) for 1000 fs
+unfix                   1
+
+# fix                     1 all nvt temp 8000 8000 0.1
+# run                     1000
+# unfix                   1
+
+fix                     1 all nvt temp 5000 5000 0.1
+run                     100 # Run this section of the simulation (melting) for 1000 fs
+unfix                   1
+
+fix                     1 all nvt temp 5000 300 0.1
+run                     500 # Run this section of the simulation (cooling) for 5000 fs
+unfix                   1
+
