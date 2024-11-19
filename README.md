@@ -83,7 +83,7 @@ This should now show the structure in OVITO. At this time, it will only show the
 
 - **Create Bonds**: This modifier creates bonds between atoms based on a cutoff distance. This is useful for visualising the connectivity of atoms in your structure, and identify structural motifs
 
-- **Coordination Analysis**: This modifier calculates the coordination number of each atom in your structure. This is useful for identifying the local environment of atoms in your structure. The cutoff here needs to be set to a value that is appropriate for your system, for Carbon, this would be $~\approx1.85~\mathrm\AA$. 
+- **Coordination Analysis**: This modifier calculates the coordination number of each atom in your structure. This is useful for identifying the local environment of atoms in your structure. The cutoff here needs to be set to a value that is appropriate for your system, for Carbon, this would be $\approx1.85~\mathrm{\AA}$. 
 
 - **Identify Diamond Structure**: This modifier identifies the diamond structure in your system. This can be useful for identifying the presence of diamond atomic environments and their type in your quenched structures.
 
