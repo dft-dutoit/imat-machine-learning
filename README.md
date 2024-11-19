@@ -57,8 +57,9 @@ Now, instead of `username@arc-login`, you will see `username@arc-cXXX` in your b
 
 ```bash
 cd $DATA/imat-machine-learning/lammps-md/test-run
+bash compile-lammps.sh
 source ../prep.sh
-mpiexec -np 4 lmp -k on -sf kk -pk kokkos newton on neigh half -in test.in
+mpiexec -np 16 lmp -in test.in
 ```
 If the simulation works, you should get an output with a timing breakdown at the end. If you get an error, please let us know. Each time you connect to the compute node, you will need to run `source prep.sh` before you start LAMMPS simulation, as it loads the required dependencies for the program.
 
