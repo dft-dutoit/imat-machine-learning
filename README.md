@@ -48,7 +48,7 @@ lammps-md README.md LICENSE
 
 You are now ready to start modelling carbon! Let's run a quick test to make sure that the LAMMPS executable is working as expected.
 
-You are currently on the **login node**. This is where you submit jobs from, or explore file structures etc. In order to run simulations, you need to connect to a **compute node**. This requires us to request the requisite resources. We will be using the `srun` command to do this. The following command will request 1 CPU node (40 cores) for 4 hours.
+You are currently on the **login node**. This is where you submit jobs from, or explore file structures etc. In order to run simulations, you need to connect to a **compute node**. This requires us to request the requisite resources. We will be using the `srun` command to do this. The following command will request 1 CPU node (40 cores) for 4 hours. 
 
 ```bash
 srun --nodes=1 --ntasks-per-node=40 --time=04:00:00 --pty /bin/bash
@@ -57,9 +57,10 @@ Now, instead of `username@arc-login`, you will see `username@arc-cXXX` in your b
 
 ```bash
 cd $DATA/imat-machine-learning/lammps-md/test-run
+source ../prep.sh
 mpiexec -np 4 lmp -k on -sf kk -pk kokkos newton on neigh half -in test.in
 ```
-If the simulation works, you should get an output with a timing breakdown at the end. If you get an error, please let us know.
+If the simulation works, you should get an output with a timing breakdown at the end. If you get an error, please let us know. Each time you connect to the compute node, you will need to run `source prep.sh` before you start LAMMPS simulation, as it loads the required dependencies for the program.
 
 You are now set up on ARC.
 
@@ -85,3 +86,9 @@ This should now show the structure in OVITO. At this time, it will only show the
 - **Coordination Analysis**: This modifier calculates the coordination number of each atom in your structure. This is useful for identifying the local environment of atoms in your structure. The cutoff here needs to be set to a value that is appropriate for your system, for Carbon, this would be $~\approx1.85~\mathrm\AA$. 
 
 - **Identify Diamond Structure**: This modifier identifies the diamond structure in your system. This can be useful for identifying the presence of diamond atomic environments and their type in your quenched structures.
+
+## Workshop Tasks
+
+1. Make sure you can run the basic input in the folder `your-sim`. After running the existing simulation file, check the trajectory in OVITO and consider what you think will change if you change any of the following properties: Number of steps to quench, density of the initial structure, number of atoms in the cell.
+2. Now that you've run your first LAMMPS simulations, you can edit the input file, and study the structures which you generate as a result, considering how changes to the input affect the resulting structures.
+3. Prepare a short presentation (couple of slides) for Thursday afternoon to present the study that you completed on these small-scale cells. Try to make sure that no two people do *exactly the same* analysis.
