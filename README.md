@@ -88,7 +88,18 @@ This should now show the structure in OVITO. At this time, it will only show the
 
 - **Identify Diamond Structure**: This modifier identifies the diamond structure in your system. This can be useful for identifying the presence of diamond atomic environments and their type in your quenched structures.
 
-## Workshop Tasks
+## THURSDAY: Workshop Tasks
+
+First, you will need to run the following commands, in this order, to prepare for running simulations:
+
+```
+srun --nodes=1 --ntasks-per-node=40 --time=04:00:00 --pty /bin/bash
+cd $DATA/imat-machine-learning/lammps-md/test-run
+source ../prep.sh
+mpiexec -np 4 lmp -in in.lammps
+```
+This should result in a short simulation output. If it does not, please ask Bianca what to do next! After this, return to the OVITO instructions above to quickly check that you can visualise the structure of your material.
+
 
 1. Make sure you can run the basic input in the folder `your-sim`. After running the existing simulation file, check the trajectory in OVITO and consider what you think will change if you change any of the following properties: Number of steps to quench, density of the initial structure, number of atoms in the cell.
 2. Now that you've run your first LAMMPS simulations, you can edit the input file, and study the structures which you generate as a result, considering how changes to the input affect the resulting structures.
